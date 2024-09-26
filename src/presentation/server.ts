@@ -1,14 +1,19 @@
 import { CheckService } from "../domain/use-cases/checks/check-service";
+import { CheckServiceMultiple } from "../domain/use-cases/checks/check-service-multiple";
 import { SendLogsEmail } from "../domain/use-cases/emails/send-logs-email";
 import { FileSystemDataSource } from "../infrastructure/datasources/file-system.datasource";
 import { MongoLogDatasource } from "../infrastructure/datasources/mongo-log.datasource";
+import { PostgresLogDatasource } from "../infrastructure/datasources/postgres-log.datasource";
 import { LogRepositoryImpl } from "../infrastructure/repositories/log.repository";
 import { CronService } from "./cron/cron-service";
 import { EmailService } from "./email/email-service";
 
-const logRepository = new LogRepositoryImpl(
-  // new FileSystemDataSource()
-  new MongoLogDatasource()
+const fsLogRepository = new LogRepositoryImpl(new FileSystemDataSource());
+
+const MongoLogRepository = new LogRepositoryImpl(new MongoLogDatasource());
+
+const PostgresLogRepository = new LogRepositoryImpl(
+  new PostgresLogDatasource()
 );
 
 const emailService = new EmailService();
@@ -32,8 +37,8 @@ export class Server {
 
     CronService.createJob("*/5 * * * * *", () => {
       const url = "https://www.google.com";
-      new CheckService(
-        logRepository,
+      new CheckServiceMultiple(
+        [fsLogRepository, MongoLogRepository, PostgresLogRepository],
         () => console.log(`Servicio ${url} esta OK`),
         (error) => console.log(error)
       ).execute(url);

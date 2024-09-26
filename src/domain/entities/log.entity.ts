@@ -2,7 +2,6 @@ export enum LogSeverityLevel {
   low = "low",
   medium = "medium",
   high = "high",
-  critical = "critical",
 }
 
 export interface LogEntityOptions {
@@ -27,6 +26,8 @@ export class LogEntity {
   }
 
   static fromJson = (json: string): LogEntity => {
+    json = json === "" ? "{}" : json;
+
     const { createdAt, level, message, origin } = JSON.parse(json);
     const log = new LogEntity({
       createdAt,
