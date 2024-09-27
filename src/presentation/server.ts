@@ -35,13 +35,13 @@ export class Server {
 
     // emailService.sendEmailAttachmentFileSystemLog("eduysanchez@hotmail.com");
 
-    CronService.createJob("*/5 * * * * *", () => {
-      const url = "https://www.google.com";
-      new CheckServiceMultiple(
-        [fsLogRepository, MongoLogRepository, PostgresLogRepository],
-        () => console.log(`Servicio ${url} esta OK`),
-        (error) => console.log(error)
-      ).execute(url);
-    });
+    // CronService.createJob("*/5 * * * * *", () => {
+    //   const url = "https://www.google.com";
+    //   new CheckServiceMultiple(
+    //     [fsLogRepository, MongoLogRepository, PostgresLogRepository],
+    //     () => console.log(`Servicio ${url} esta OK`),
+    //     (error) => console.log(error)
+    //   ).execute(url);
+    // });
   }
 }

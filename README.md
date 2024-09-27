@@ -24,13 +24,14 @@ Este es el repositorio del proyecto NOC. Aquí encontrarás toda la información
    ```bash
    npm install
    ```
-4. Crea un archivo `.env` en la raíz del proyecto con las siguientes variables de entorno:
+4. Levantar el docker-compose:
    ```bash
-   PORT=3000
-   MAILER_EMAIL=
-   MAILER_SECRET_KEY=
-   DEV=
-   PROD=
+   docker-compose up -d
+   ```
+5. Crea un archivo `.env` en la raíz del proyecto con las variables de entorno disponibles en el archivo `.env.template`.
+6. Generar el cliente de prisma:
+   ```bash
+   npx prisma migrate dev
    ```
 
 ### Scripts Disponibles

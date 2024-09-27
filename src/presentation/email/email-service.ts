@@ -53,7 +53,7 @@ export class EmailService {
     const attachments: Attachment[] = [
       {
         filename: "logs-all.log",
-        path: "./logs/logs-all.log",
+        path: "./db/logs/logs-all.log",
       },
     ];
 

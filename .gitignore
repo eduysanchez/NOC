@@ -32,5 +32,7 @@ build/
 Thumbs.db
 
 # Database
-mongo/
-postgres/
+db/
+
+# Testing
+coverage/
