@@ -31,7 +31,7 @@ export class SendLogsEmail implements SendLogsEmailUseCase {
       return true;
     } catch (error) {
       const log = new LogEntity({
-        message: `Email enviado no enviado a ${to}. Error: ${error}`,
+        message: `${error}`,
         level: LogSeverityLevel.high,
         origin: "send-logs-email.ts",
       });
